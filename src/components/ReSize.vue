@@ -1,5 +1,5 @@
 <template>
-    <div v-on:mousedown="startSize($event)" v-on:mouseup="endSize()"/>
+    <div v-on:mousedown="startSize($event)"/>
 </template>
 
 <script>

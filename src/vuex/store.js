@@ -33,11 +33,19 @@ const store = createStore({
                         over.obj.width = state.card.width - over.obj.left
                         return;
                     }
+                    else if( (over.obj.width - over.shift) < 0){
+                        over.obj.width = 0
+                        return;
+                    }
                     over.obj.width -= over.shift
                     break
                 case 'bot':
                     if ( (over.obj.height - over.shift + over.obj.top) > state.card.height ){
                         over.obj.height = state.card.height - over.obj.top
+                        return;
+                    }
+                    else if( (over.obj.height - over.shift) < 0){
+                        over.obj.height = 0
                         return;
                     }
                     over.obj.height -= over.shift
@@ -47,16 +55,29 @@ const store = createStore({
                         over.obj[over.side] = 0
                         return
                     }
-                    over.obj.width += over.shift
-                    over.obj[over.side] -= over.shift
+                    else if( (over.obj.width) < 0){
+                        over.obj.width = 1
+                        return;
+                    }
+                    else{
+                        console.log(over.obj.width - over.shift)
+                        over.obj.width += over.shift
+                        over.obj[over.side] -= over.shift
+                    }
                     break
                 case 'top':
                     if (over.obj[over.side] - over.shift < 0){
                         over.obj[over.side] = 0
                         return
                     }
-                    over.obj.height += over.shift
-                    over.obj[over.side] -= over.shift
+                    else if( (over.obj.height) < 0){
+                        over.obj.height = 0
+                        return;
+                    }
+                    else{
+                        over.obj.height += over.shift
+                        over.obj[over.side] -= over.shift
+                    }
                     break
                 case 'center':
                     if( +over.obj.height + (over.obj.top - (state.coord[1] - over.newCoord[1])) > state.card.height ){
