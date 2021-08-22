@@ -53,14 +53,12 @@ const store = createStore({
                 case 'left':
                     if (over.obj[over.side] - over.shift < 0){
                         over.obj[over.side] = 0
-                        return
                     }
-                    else if( (over.obj.width) < 0){
-                        over.obj.width = 1
+                    else if( (over.obj.width + over.shift) < 0){
+                        over.obj.width = 0
                         return;
                     }
                     else{
-                        console.log(over.obj.width - over.shift)
                         over.obj.width += over.shift
                         over.obj[over.side] -= over.shift
                     }
@@ -70,7 +68,7 @@ const store = createStore({
                         over.obj[over.side] = 0
                         return
                     }
-                    else if( (over.obj.height) < 0){
+                    else if( (over.obj.height + over.shift) < 0){
                         over.obj.height = 0
                         return;
                     }
